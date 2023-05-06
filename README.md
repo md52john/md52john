@@ -16,4 +16,4 @@ md52john <_hash_>
 md52john 82bb413746aee42f89dea2b59614f9ef
 ```
 
-[Documentation](md52john.github.io)
+[Documentation](https://md52john.github.io/)
