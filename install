@@ -1,0 +1,3 @@
+apt-get update
+chmod +x md52john
+cp md52john /usr/bin
