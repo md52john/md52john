@@ -1,6 +1,6 @@
 # md52john
 
-![img](jdjsj)
+![img](j.jpeg)
 
 md52john is a simple Shell script created to crack the md5 hash, this simple Shell script is powered by John The Ripper to crack the hash.
 
