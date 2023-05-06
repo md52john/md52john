@@ -1,0 +1,54 @@
+#!/bin/bash
+
+##################################################
+#                                                #
+# Author     : Rofi (FII14)                      #
+# Script for : Crack the MD5 hash                #
+# Homepage   : https://github.com/FII14/md52john #
+#                                                #
+##################################################
+
+wordlist_path=/usr/share/wordlists
+download_rockyou(){
+        apt-get install wget
+        wget -c url https://gitlab.com/kalilinux/packages/wordlists/-/raw/kali/master/rockyou.txt.gz
+        gzip -d /usr/share/wordlists/rockyou.txt.gz
+}
+main(){
+        check_dependencies(){
+                if [[ -d /usr/share/wordlists ]]; then
+                        if [[ ! -f /usr/share/wordlists/rockyou.txt ]]; then
+                                cd "${wordlist_path}"
+                                download_rockyou
+                                main
+                        else
+                                if [[ `apt-cache policy john | grep -i "(none)"` ]]; then
+                                        apt-get install john
+                                        main
+                                else
+                                        help(){
+                                                echo "usage: md52john < hash >"
+                                        }
+                                fi
+
+                        fi
+                else
+                        mkdir /usr/share/wordlists
+                        cd "${wordlist_path}"
+                        download_rockyou
+                        main
+                fi
+        }
+        check_dependencies
+}
+main
+if [[ "${#}" -eq 1 ]]; then
+        nama_file_hash=$(date +%m-%d-%Y-%T)
+        format="Raw-MD5"
+        echo "${1}" > "${nama_file_hash}.txt"
+        john "${nama_file_hash}.txt" --wordlist="/usr/share/wordlists/rockyou.txt" --format="${format}"
+        john --show "${nama_file_hash}.txt" --format="${format}"
+        exit 0
+else
+        help
+fi
