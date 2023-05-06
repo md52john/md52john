@@ -27,7 +27,7 @@ main(){
                                         main
                                 else
                                         help(){
-                                                echo "usage: md52john < hash >"
+                                                echo "usage: md52john <_HASH_>"
                                         }
                                 fi
 
@@ -46,8 +46,7 @@ if [[ "${#}" -eq 1 ]]; then
         nama_file_hash=$(date +%m-%d-%Y-%T)
         format="Raw-MD5"
         echo "${1}" > "${nama_file_hash}.txt"
-        john "${nama_file_hash}.txt" --wordlist="/usr/share/wordlists/rockyou.txt" --format="${format}"
-        john --show "${nama_file_hash}.txt" --format="${format}"
+        john "${nama_file_hash}.txt" --wordlist="/usr/share/wordlists/rockyou.txt" --format="${format}" --pot="output_${nama_file_hash}.txt"
         exit 0
 else
         help
