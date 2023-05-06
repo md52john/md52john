@@ -7,7 +7,7 @@ md52john is a simple Shell script created to crack the md5 hash, this simple She
 ## Usage:
 
 ```
-md52john <_hash_>
+md52john <_HASH_>
 ```
 
 ## Example:
